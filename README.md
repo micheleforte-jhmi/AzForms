@@ -341,7 +341,7 @@ Pre-requisite: create Bicep modules that represent the way you deploy the buildi
 
 Note: this example uses a public Github repository, but you can use a private repository as well by using a proxy function app. The json files need to be accessible from the Azure portal (could also use an internal only URL, assets are retrieved via the browser when in the Azure portal)
 
-** 1. Create Bicep template **
+**1. Create Bicep template**
 
 Review modules folder:
     appService
@@ -362,13 +362,13 @@ az bicep decompile --file main.json
 
 Note: warnings will be generated, some properties may be read only or not supported to be hard coded.
 
-** 2. If using Bicep, compile the template to ARM **
+**2. If using Bicep, compile the template to ARM**
 
 Take the Bicep file and compile it to ARM so that it can be used in the form builder tool. 
 
 `az bicep build --file .\1-app-with-storage.bicep`
 
-** 3. Create a createUiDefinition.json file for each service using the Azure Portal **
+**3. Create a createUiDefinition.json file for each service using the Azure Portal**
 
 Take the now compiled ARM template and use the Azure Portal to create a form for the service.
 
@@ -387,7 +387,7 @@ Make sure to update outputs if you add new steps.
 
 Once the new UI definition is created and looks good in the preview step, save that file as part of the repository.
 
-** 4. Create/update a Git repository with the ARM template, createUiDefinition.json, and any other necessary files **
+**4. Create/update a Git repository with the ARM template, createUiDefinition.json, and any other necessary files**
 
 Update your Git repository to add the ARM template, the createUiDefinition.json file, and a README.md file with the "Deploy to Azure" button. In the README.md file add details about the service type you created and any pre-requisites or expected parameters. 
 
@@ -397,7 +397,7 @@ Demo:
 -show files in Github repo
 -show how to get raw URL contents link
 
-** 5. Build the "Deploy to Azure" button URL and add it to the README.md file in the repository **
+**5. Build the "Deploy to Azure" button URL and add it to the README.md file in the repository**
 
 The deploy to Azure button is a button that can be exposed to your end users that are not familiar with scripting/automation so they can deploy the service to Azure with your presets and custom form.
 
@@ -454,7 +454,7 @@ Once you have the URL, paste it into your active Azure session to verify it load
 [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fdanfsnet%2Fjhu-deployment%2Fmaster%2Fservices%2F1-app-with-storage%2Fazure-deploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fdanfsnet%2Fjhu-deployment%2Fmaster%2Fservices%2F1-app-with-storage%2FcreateUiDefinition.json)
 
 
-** 6. Update your Git repo (and push) and click to test **
+**6. Update your Git repo (and push) and click to test**
 
 Browse to your repository URL and click the Deploy to Azure button and test the deployment.
 
