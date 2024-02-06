@@ -92,16 +92,18 @@
                         }
                     ]
                 }
-            ],
-            "_dxContentPath": "view.properties"
+            ]
         },
         "outputs": {
             "kind": "ResourceGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
             "parameters": {
-                "_dxContentPath": "view.outputs.parameters"
-            },
-            "_dxContentPath": "view.outputs"
-        },
-        "_dxContentPath": "view"
+                "environmentType": "[steps('basics').environmentType]",
+                "location": "[steps('basics').location]",
+                "prefix": "[steps('basics').prefix]",
+                "storageAccountName": "[steps('basics').storageAccountName]"
+            }
+        }
     }
 }
