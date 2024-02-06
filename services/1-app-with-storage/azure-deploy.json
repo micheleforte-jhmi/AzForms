@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.24.24.22086",
-      "templateHash": "16545051205525216015"
+      "templateHash": "5383052038609963036"
     }
   },
   "parameters": {
@@ -59,7 +59,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.24.24.22086",
-              "templateHash": "1245606715404622851"
+              "templateHash": "17235631474102518754"
             }
           },
           "parameters": {
@@ -86,6 +86,16 @@
               },
               "kind": "StorageV2",
               "properties": {
+                "allowCrossTenantReplication": false,
+                "minimumTlsVersion": "TLS1_2",
+                "allowBlobPublicAccess": false,
+                "allowSharedKeyAccess": true,
+                "networkAcls": {
+                  "bypass": "AzureServices",
+                  "virtualNetworkRules": [],
+                  "ipRules": [],
+                  "defaultAction": "Allow"
+                },
                 "supportsHttpsTrafficOnly": true
               }
             }

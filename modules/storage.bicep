@@ -11,6 +11,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   }
   kind: 'StorageV2'
   properties: {
+    allowCrossTenantReplication: false
+    minimumTlsVersion: 'TLS1_2'
+    allowBlobPublicAccess: false
+    allowSharedKeyAccess: true
+    networkAcls: {
+      bypass: 'AzureServices'
+      virtualNetworkRules: []
+      ipRules: []
+      defaultAction: 'Allow'
+    }
     supportsHttpsTrafficOnly: true  // set up your modules with presets
   }
 }

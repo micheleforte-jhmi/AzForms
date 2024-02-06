@@ -9,15 +9,27 @@
                     "name": "basics",
                     "label": "Basics",
                     "elements": [
-                        {
-                            "name": "resourceScope",
-                            "type": "Microsoft.Common.ResourceScope",
-                            "location": {
-                                "resourceTypes": [
-                                    "microsoft.resources/resourcegroups"
-                                ]
-                            }
-                        },
+						{
+							"name": "resourceScope",
+							"type": "Microsoft.Common.ResourceScope",
+							"location": {
+								"resourceTypes": [
+									"microsoft.resources/resourcegroups"
+								]
+							}
+						},
+						{
+							"name": "textBlock1",
+							"type": "Microsoft.Common.TextBlock",
+							"visible": true,
+							"options": {
+								"text": "Here are some additional details about this service.",
+								"link": {
+									"label": "Learn more",
+									"uri": "https://www.microsoft.com"
+								}
+							}
+						},
                         {
                             "name": "environmentType",
                             "type": "Microsoft.Common.DropDown",
@@ -41,8 +53,14 @@
                             },
                             "infoMessages": [],
                             "visible": true
-                        },
-                        {
+                        }
+                    ]
+                },
+				{
+					"name": "storagestuff",
+                    "label": "Storage Stuff",
+                    "elements": [
+						{
                             "name": "location",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Location",
@@ -90,8 +108,8 @@
                             "infoMessages": [],
                             "visible": true
                         }
-                    ]
-                }
+					]
+				}
             ]
         },
         "outputs": {
@@ -100,9 +118,9 @@
             "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
             "parameters": {
                 "environmentType": "[steps('basics').environmentType]",
-                "location": "[steps('basics').location]",
-                "prefix": "[steps('basics').prefix]",
-                "storageAccountName": "[steps('basics').storageAccountName]"
+                "location": "[steps('storagestuff').location]",
+                "prefix": "[steps('storagestuff').prefix]",
+                "storageAccountName": "[steps('storagestuff').storageAccountName]"
             }
         }
     }
