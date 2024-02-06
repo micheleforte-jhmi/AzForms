@@ -1,0 +1,18 @@
+**Azure Managed Applications**
+
+To publish a managed application to your service catalog, do the following tasks:
+
+- Create an Azure Resource Manager template (ARM template) that defines the resources to deploy with the managed application.
+- Define the user interface elements for the portal when deploying the managed application.
+- Create a .zip package that contains the required JSON files. The .zip package file has a 120-MB limit for a service catalog's managed application definition.
+- Publish the managed application definition so it's available in your service catalog.
+
+**Defining Azure Portal Experience**
+
+The user interface (UI) definition for a managed application is defined in a JSON file. The UI definition file is named createUiDefinition.json. 
+
+The UI definition file defines the user interface elements for the portal when deploying the managed application.
+
+**Package the files**
+
+
