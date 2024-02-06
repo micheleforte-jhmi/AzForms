@@ -1,4 +1,4 @@
-***App with Storage Example***
+**App with Storage Example**
 
 This service will deploy an Azure App Service along with a storage account.
 
@@ -13,4 +13,4 @@ The expected parameters for this deployment are:
 
 
 
-[![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fgithub.com%2Fdanfsnet%2Fjhu-deployment%2Fblob%2Fmaster%2Fservices%2F1-app-with-storage%2Fazure-deploy.json/uiFormDefinitionUri/https%3A%2F%2Fgithub.com%2Fdanfsnet%2Fjhu-deployment%2Fblob%2Fmaster%2Fservices%2F1-app-with-storage%2FcreateUiDefinition.json)
+[![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fdanfsnet%2Fjhu-deployment%2Fmaster%2Fservices%2F1-app-with-storage%2Fazure-deploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fdanfsnet%2Fjhu-deployment%2Fmaster%2Fservices%2F1-app-with-storage%2FcreateUiDefinition.json)
