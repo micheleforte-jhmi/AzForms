@@ -11,7 +11,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   }
   kind: 'StorageV2'
   properties: {
-    supportsHttpsTrafficOnly: true
+    supportsHttpsTrafficOnly: true  // set up your modules with presets
   }
 }
 

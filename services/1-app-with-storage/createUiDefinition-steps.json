@@ -1,0 +1,155 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Test Form View",
+            "steps": [
+                {
+                    "name": "resourcegroup",
+                    "label": "Resource Group",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": [
+                                    "microsoft.resources/resourcegroups"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "environmentType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Environment Type",
+                            "subLabel": "",
+                            "defaultValue": " ",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "nonprod",
+                                        "value": "nonprod"
+                                    },
+                                    {
+                                        "label": "prod",
+                                        "value": "prod"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Location",
+                            "subLabel": "",
+                            "defaultValue": "[[resourceGroup().location]",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                },
+				{
+                    "name": "environment",
+                    "label": "Environment",
+                    "elements": [
+                        {
+                            "name": "environmentType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Environment Type",
+                            "subLabel": "",
+                            "defaultValue": " ",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": true,
+                                "allowedValues": [
+                                    {
+                                        "label": "nonprod",
+                                        "value": "nonprod"
+                                    },
+                                    {
+                                        "label": "prod",
+                                        "value": "prod"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Location",
+                            "subLabel": "",
+                            "defaultValue": "[[resourceGroup().location]",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "prefix",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Prefix",
+                            "subLabel": "",
+                            "defaultValue": "danfsnet",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "storageAccountName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Storage Account Name",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "kind": "ResourceGroup",
+            "location": "[steps('resourcegroup').resourceScope.location.name]",
+            "resourceGroupId": "[steps('resourcegroup').resourceScope.resourceGroup.id]",
+            "parameters": {
+                "environmentType": "[steps('environment').environmentType]",
+                "location": "[steps('environment').location]",
+                "prefix": "[steps('environment').prefix]",
+                "storageAccountName": "[steps('environment').storageAccountName]"
+            }
+        }
+    }
+}
