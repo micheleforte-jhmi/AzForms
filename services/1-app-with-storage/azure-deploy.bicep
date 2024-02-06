@@ -9,7 +9,7 @@ param location string = resourceGroup().location
 param prefix string= 'danfsnet'
 param storageAccountName string
 
-module cdn '../../modules/storage.bicep' = {
+module storage '../../modules/storage.bicep' = {
   name: 'storage'
   params: {
     location: location
