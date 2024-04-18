@@ -1,0 +1,42 @@
+{
+	"policyRule": {
+      "if": {
+        "field": "type",
+        "in": [
+            "Microsoft.Storage/storageAccounts"
+        ]
+      },
+      "then": {
+        "effect": "auditIfNotExists",
+        "details": {
+          "type": "Microsoft.Insights/diagnosticSettings",
+          "existenceCondition": {
+            "count": {
+              "field": "Microsoft.Insights/diagnosticSettings/logs[*]",
+              "where": {
+                "allOf": [
+                  {
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].enabled",
+                    "equals": "true"
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "field": "microsoft.insights/diagnosticSettings/logs[*].categoryGroup",
+                        "equals": "audit"
+                      },
+                      {
+                        "field": "microsoft.insights/diagnosticSettings/logs[*].categoryGroup",
+                        "equals": "allLogs"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "greater": 0
+          }
+        }
+      }
+    }
+}

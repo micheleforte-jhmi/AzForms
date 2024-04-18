@@ -18,7 +18,7 @@ Part 2
 
 Part 3
 
-- Bicep / Why use IaaC?
+- Bicep / Why use IaC?
 - Bicep vs. ARM
 - Bicep Parameters
 - Loops / Conditionals / etc
@@ -460,7 +460,6 @@ Browse to your repository URL and click the Deploy to Azure button and test the 
 
 **Questions?**
 
-
 **Azure Managed Applications**
 
 To publish a managed application to your service catalog, do the following tasks:
@@ -469,7 +468,3 @@ To publish a managed application to your service catalog, do the following tasks
 - Define the user interface elements for the portal when deploying the managed application.
 - Create a .zip package that contains the required JSON files. The .zip package file has a 120-MB limit for a service catalog's managed application definition.
 - Publish the managed application definition so it's available in your service catalog.
-
-
-
-
