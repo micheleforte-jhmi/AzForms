@@ -471,3 +471,85 @@ To publish a managed application to your service catalog, do the following tasks
 - Define the user interface elements for the portal when deploying the managed application.
 - Create a .zip package that contains the required JSON files. The .zip package file has a 120-MB limit for a service catalog's managed application definition.
 - Publish the managed application definition so it's available in your service catalog.
+
+
+# VM Example - April 19, 2024 #
+
+Background: 
+The latest main.bicep VM example was adapted from the examples here:
+https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-with-standardssd-disk/README.md
+
+Step 1: 
+Open this repository in VS Code and in the terminal, log in to the AZ CLI and set the default resource group
+
+(note you should replace the resource group below with your resource)
+```
+az configure --defaults group='danfs.net-bicep-vm' 
+```
+
+Step 2: 
+Work on bicep file and modules with a folder in the `services` directory. 
+
+By work on here, specifically create a new main.bicep file and reference bicep modules to create a new "service" you would want to offer to customers. 
+
+In my case the process from the above example was:
+
+1. For each resource in the example bicep file, create a new bicep file in the modules folder
+2. Extract needed parameters from the resource that will be called from the main.bicep file
+3. In the main.bicep file, reference the modules and pass in the parameters required
+4. Create the azure-deploy.parameters.json file with the parameters that will be passed in to the main.bicep file (for testing)
+5. Test the deployment of the main.bicep file using the AZ CLI
+
+Step 3:
+Test the deployment of the main.bicep file using the AZ CLI
+
+The name given in the --name parameter is used to track the deployment in the Azure portal. The name doesn't need to be unique, but it must be less than 64 characters long.
+
+```
+az deployment group create --name BicepExample2 --template-file main.bicep --parameters .\azure-deploy.parameters.json
+```
+
+Step 4:
+Once testing is successful using the AZ CLI, compile the bicep file to an ARM template so it can be used with the Form Sandbox
+
+"Build" bicep to json ARM template
+
+```
+az bicep build --file .\main.bicep
+```
+
+Step 5: Use ARM template in Azure Portal to create a form
+Go to https://aka.ms/form/sandbox
+
+Open the ARM template file in the Sandbox that you generated in Step 4. Make sure to set the Package Type to CustomTemplate and click the checkbox for "Enable control editing". Preview and edit the form as needed (note in my example I changed the visibility of the resourceGroup().location field since it is a dynamic reference)
+
+Step 6: 
+When you are satisfied with the form, save the form as createUiDefinition.json in your services folder
+
+Step 7:
+Complete a `git commit -m "Your commit message"` 
+Then do `git push` to push the changes to the repository
+
+
+Step 8:
+Create the URL for the Deploy to Azure button.
+Note: this step will change if using an Azure Function App proxy to access a private repository. For now set your Azure DevOps repository/project to be public to test these steps.
+
+After posted to ADO/Github, capture the raw links to the ARM template and createUiDefinition.json files
+
+```
+https://raw.githubusercontent.com/danfsnet/jhu-deployment/master/services/5-vm-with-disk-pt2/main.json
+https://raw.githubusercontent.com/danfsnet/jhu-deployment/master/services/5-vm-with-disk-pt2/createUiDefinition.json
+```
+
+Once you have those, pass them into the PowerShell script to generate the URL for the Deploy to Azure button
+Note: the format of the links is in Markdown format, so you can paste the output directly into the README.md file in the repository
+This is also supported in Azure DevOps.
+
+However, as noted on the call you can also directly copy/paste the URL into the Azure Portal to test the deployment or send the URL to a customer to test the deployment.
+
+```
+.\generate-buttons.ps1 -link_to_createUiDefinition_json "https://raw.githubusercontent.com/danfsnet/jhu-deployment/master/services/5-vm-with-disk-pt2/createUiDefinition.json" -link_to_arm_json "https://raw.githubusercontent.com/danfsnet/jhu-deployment/master/services/5-vm-with-disk-pt2/main.json"
+```
+
+Add the output to the README.md file in the repository as done in the 5-vm-with-disk-pt2 folder.

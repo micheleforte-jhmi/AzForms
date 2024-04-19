@@ -60,7 +60,7 @@ module nsg '../../modules/nsg.bicep' = {
     networkSecurityGroupName: networkSecurityGroupName
   }
 }
-
+/*
 module vnet '../../modules/vnet-new.bicep' = {
   name: 'vnet'
   params: {
@@ -106,9 +106,8 @@ module virtualMachine '../../modules/vm.bicep' = {
   }
   dependsOn : [
     nic
-    vnet
   ]
 }
-
+*/
 
 

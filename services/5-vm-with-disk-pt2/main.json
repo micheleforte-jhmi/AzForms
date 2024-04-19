@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.170.59819",
-      "templateHash": "7779250066521062676"
+      "templateHash": "1900207037499069325"
     }
   },
   "parameters": {
@@ -550,8 +550,7 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'nic')]",
-        "[resourceId('Microsoft.Resources/deployments', 'vnet')]"
+        "[resourceId('Microsoft.Resources/deployments', 'nic')]"
       ]
     }
   ]
