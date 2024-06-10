@@ -1,0 +1,135 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Test Form View",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": [
+                                    "microsoft.resources/resourcegroups"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Location",
+                            "subLabel": "",
+                            "defaultValue": "eastus",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "vnetName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Vnet Name",
+                            "subLabel": "",
+                            "defaultValue": "AZ-East-JH-Training-10.150.224.0-20",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "storageAccountName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Storage Account Name",
+                            "subLabel": "",
+                            "defaultValue": "azdevopsformtesting",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "addressSpace",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Address Space",
+                            "subLabel": "",
+                            "defaultValue": "10.150.224.0/20",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subnetName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subnet Name",
+                            "subLabel": "",
+                            "defaultValue": "AZ-East-JH-Training-10.150.224.0-20",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subnetPrefix",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subnet Prefix",
+                            "subLabel": "",
+                            "defaultValue": "10.150.224.0/24",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "kind": "ResourceGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
+            "parameters": {
+                "location": "[steps('basics').location]",
+                "vnetName": "[steps('basics').vnetName]",
+                "storageAccountName": "[steps('basics').storageAccountName]",
+                "addressSpace": "[steps('basics').addressSpace]",
+                "subnetName": "[steps('basics').subnetName]",
+                "subnetPrefix": "[steps('basics').subnetPrefix]"
+            }
+        }
+    }
+}

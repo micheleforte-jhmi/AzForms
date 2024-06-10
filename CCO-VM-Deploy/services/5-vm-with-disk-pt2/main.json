@@ -1,0 +1,558 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.26.170.59819",
+      "templateHash": "7779250066521062676"
+    }
+  },
+  "parameters": {
+    "virtualMachineName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the VM"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The admin user name of the VM"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The admin password of the VM"
+      }
+    },
+    "dataDiskSize": {
+      "type": "int",
+      "defaultValue": 1024,
+      "metadata": {
+        "description": "The size in GB of the data disks"
+      }
+    },
+    "dataDisksCount": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of data disks to create"
+      }
+    },
+    "diskType": {
+      "type": "string",
+      "defaultValue": "StandardSSD_LRS",
+      "allowedValues": [
+        "StandardSSD_LRS",
+        "Standard_LRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "The Storage type of the data Disks"
+      }
+    },
+    "virtualMachineSize": {
+      "type": "string",
+      "defaultValue": "Standard_D2s_v3",
+      "allowedValues": [
+        "Standard_D2s_v3",
+        "Standard_D2s_v4",
+        "Standard_D2s_v5",
+        "Standard_D4s_v5"
+      ],
+      "metadata": {
+        "description": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS"
+      }
+    },
+    "windowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2022-Datacenter",
+      "allowedValues": [
+        "2019-Datacenter",
+        "2022-Datacenter"
+      ],
+      "metadata": {
+        "description": "The Windows version for the VM."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.0.0.0/16",
+      "metadata": {
+        "description": "The address prefix for the virtual network"
+      }
+    },
+    "subnetPrefix": {
+      "type": "string",
+      "defaultValue": "10.0.0.0/24",
+      "metadata": {
+        "description": "The subnet prefix for the virtual network"
+      }
+    }
+  },
+  "variables": {
+    "virtualNetworkName": "[format('{0}-vnet', toLower(parameters('virtualMachineName')))]",
+    "subnetName": "[format('{0}-subnet', toLower(parameters('virtualMachineName')))]",
+    "OSDiskName": "[format('{0}-OSDisk', toLower(parameters('virtualMachineName')))]",
+    "networkInterfaceName": "[format('{0}-nic', toLower(parameters('virtualMachineName')))]",
+    "networkSecurityGroupName": "[format('{0}-nsg', variables('subnetName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "nsg",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('networkSecurityGroupName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.26.170.59819",
+              "templateHash": "3830256681360242010"
+            }
+          },
+          "parameters": {
+            "networkSecurityGroupName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkSecurityGroups",
+              "apiVersion": "2021-03-01",
+              "name": "[parameters('networkSecurityGroupName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "securityRules": [
+                  {
+                    "name": "default-allow-3389",
+                    "properties": {
+                      "priority": 1000,
+                      "access": "Allow",
+                      "direction": "Inbound",
+                      "destinationPortRange": "3389",
+                      "protocol": "Tcp",
+                      "sourceAddressPrefix": "*",
+                      "sourcePortRange": "*",
+                      "destinationAddressPrefix": "*"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "outputs": {
+            "nsg": {
+              "type": "object",
+              "value": "[reference(resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName')), '2021-03-01', 'full')]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "vnet",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualNetworkName": {
+            "value": "[variables('virtualNetworkName')]"
+          },
+          "addressPrefix": {
+            "value": "[parameters('addressPrefix')]"
+          },
+          "subnetName": {
+            "value": "[variables('subnetName')]"
+          },
+          "subnetPrefix": {
+            "value": "[parameters('subnetPrefix')]"
+          },
+          "nsgId": {
+            "value": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/{2}', subscription().subscriptionId, resourceGroup().name, reference(resourceId('Microsoft.Resources/deployments', 'nsg'), '2022-09-01').outputs.nsg.value.resourceId)]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.26.170.59819",
+              "templateHash": "11891936287316814440"
+            }
+          },
+          "parameters": {
+            "virtualNetworkName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "addressPrefix": {
+              "type": "string"
+            },
+            "subnetName": {
+              "type": "string"
+            },
+            "subnetPrefix": {
+              "type": "string"
+            },
+            "nsgId": {
+              "type": "string"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks",
+              "apiVersion": "2021-03-01",
+              "name": "[parameters('virtualNetworkName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "addressSpace": {
+                  "addressPrefixes": [
+                    "[parameters('addressPrefix')]"
+                  ]
+                },
+                "subnets": [
+                  {
+                    "name": "[parameters('subnetName')]",
+                    "properties": {
+                      "addressPrefix": "[parameters('subnetPrefix')]",
+                      "networkSecurityGroup": {
+                        "id": "[parameters('nsgId')]"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "outputs": {
+            "vnet": {
+              "type": "object",
+              "value": "[reference(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName')), '2021-03-01', 'full')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'nsg')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "nic",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "networkInterfaceName": {
+            "value": "[variables('networkInterfaceName')]"
+          },
+          "vnetName": {
+            "value": "[variables('virtualNetworkName')]"
+          },
+          "subnetName": {
+            "value": "[variables('subnetName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.26.170.59819",
+              "templateHash": "10489112473520284366"
+            }
+          },
+          "parameters": {
+            "networkInterfaceName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "vnetName": {
+              "type": "string"
+            },
+            "subnetName": {
+              "type": "string"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkInterfaces",
+              "apiVersion": "2021-03-01",
+              "name": "[parameters('networkInterfaceName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "properties": {
+                      "privateIPAllocationMethod": "Dynamic",
+                      "subnet": {
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "outputs": {
+            "nic": {
+              "type": "object",
+              "value": "[reference(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName')), '2021-03-01', 'full')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'vnet')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "vm",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualMachineName": {
+            "value": "[parameters('virtualMachineName')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "diskType": {
+            "value": "[parameters('diskType')]"
+          },
+          "dataDiskSize": {
+            "value": "[parameters('dataDiskSize')]"
+          },
+          "dataDisksCount": {
+            "value": "[parameters('dataDisksCount')]"
+          },
+          "OSDiskName": {
+            "value": "[variables('OSDiskName')]"
+          },
+          "virtualMachineSize": {
+            "value": "[parameters('virtualMachineSize')]"
+          },
+          "windowsOSVersion": {
+            "value": "[parameters('windowsOSVersion')]"
+          },
+          "nicId": {
+            "value": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/{2}', subscription().subscriptionId, resourceGroup().name, reference(resourceId('Microsoft.Resources/deployments', 'nic'), '2022-09-01').outputs.nic.value.resourceId)]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.26.170.59819",
+              "templateHash": "3662840249791508118"
+            }
+          },
+          "parameters": {
+            "virtualMachineName": {
+              "type": "string",
+              "metadata": {
+                "description": "The name of the VM"
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "The location of the VM in Azure"
+              }
+            },
+            "virtualMachineSize": {
+              "type": "string",
+              "allowedValues": [
+                "Standard_D2s_v3",
+                "Standard_D2s_v4",
+                "Standard_D2s_v5",
+                "Standard_D4s_v5"
+              ],
+              "metadata": {
+                "description": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS"
+              }
+            },
+            "adminUsername": {
+              "type": "string",
+              "metadata": {
+                "description": "The admin user name of the VM"
+              }
+            },
+            "adminPassword": {
+              "type": "securestring",
+              "metadata": {
+                "description": "The admin password of the VM"
+              }
+            },
+            "diskType": {
+              "type": "string",
+              "allowedValues": [
+                "StandardSSD_LRS",
+                "Standard_LRS",
+                "Premium_LRS"
+              ],
+              "metadata": {
+                "description": "The Storage type of the data Disks"
+              }
+            },
+            "windowsOSVersion": {
+              "type": "string",
+              "allowedValues": [
+                "2019-Datacenter",
+                "2022-Datacenter"
+              ],
+              "metadata": {
+                "description": "The Windows version for the VM."
+              }
+            },
+            "dataDisksCount": {
+              "type": "int",
+              "maxValue": 2,
+              "metadata": {
+                "description": "The number of data disks to create"
+              }
+            },
+            "dataDiskSize": {
+              "type": "int",
+              "maxValue": 5024,
+              "metadata": {
+                "description": "The size in GB of the data disks"
+              }
+            },
+            "OSDiskName": {
+              "type": "string"
+            },
+            "nicId": {
+              "type": "string",
+              "metadata": {
+                "description": "The id of the network interface/nic"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Compute/virtualMachines",
+              "apiVersion": "2021-07-01",
+              "name": "[parameters('virtualMachineName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "hardwareProfile": {
+                  "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "osProfile": {
+                  "computerName": "[parameters('virtualMachineName')]",
+                  "adminUsername": "[parameters('adminUsername')]",
+                  "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                  "copy": [
+                    {
+                      "name": "dataDisks",
+                      "count": "[length(range(0, parameters('dataDisksCount')))]",
+                      "input": {
+                        "name": "[format('{0}-DataDisk{1}', parameters('virtualMachineName'), range(0, parameters('dataDisksCount'))[copyIndex('dataDisks')])]",
+                        "diskSizeGB": "[parameters('dataDiskSize')]",
+                        "lun": "[range(0, parameters('dataDisksCount'))[copyIndex('dataDisks')]]",
+                        "createOption": "Empty",
+                        "managedDisk": {
+                          "storageAccountType": "[parameters('diskType')]"
+                        }
+                      }
+                    }
+                  ],
+                  "osDisk": {
+                    "osType": "Windows",
+                    "name": "[parameters('OSDiskName')]",
+                    "caching": "ReadWrite",
+                    "createOption": "FromImage",
+                    "managedDisk": {
+                      "storageAccountType": "[parameters('diskType')]"
+                    },
+                    "diskSizeGB": 128
+                  },
+                  "imageReference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "[parameters('windowsOSVersion')]",
+                    "version": "latest"
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaces": [
+                    {
+                      "id": "[parameters('nicId')]"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'nic')]",
+        "[resourceId('Microsoft.Resources/deployments', 'vnet')]"
+      ]
+    }
+  ]
+}
