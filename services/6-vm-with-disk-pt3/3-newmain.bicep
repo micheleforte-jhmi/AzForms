@@ -49,8 +49,6 @@ param location string = resourceGroup().location
 @description('The ID of the existing virtual network')
 param virtualNetworkId string
 
-param vnetname string
-
 @description('The name of the subnet in the existing virtual network')
 param subnetName string
 
@@ -63,13 +61,11 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' existing = {
 var adminUsername = listSecret('https://${keyVaultName}.vault.azure.net/secrets/${adminUsernameSecretName}', '2021-04-01').value
 var adminPassword = listSecret('https://${keyVaultName}.vault.azure.net/secrets/${adminPasswordSecretName}', '2021-04-01').value
 
-// Get the existing VNet
+// Reference the existing subnet within the VNet
 resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' existing = {
-  id: virtualNetworkId
-  name: vnetname
+  name: resourceId('Microsoft.Network/virtualNetworks', virtualNetworkId)
 }
 
-// Get the existing subnet within the VNet
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' existing = {
   parent: vnet
   name: subnetName

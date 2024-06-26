@@ -45,7 +45,7 @@
                             "label": "Network Security Group Name",
                             "subLabel": "",
                             "defaultValue": "",
-                            "toolTip": "",
+                            "toolTip": "The name of the Network Security Group",
                             "constraints": {
                                 "required": true,
                                 "regex": "",
@@ -234,6 +234,38 @@
                             },
                             "infoMessages": [],
                             "visible": true
+                        },
+                        {
+                            "name": "virtualNetworkId",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Virtual Network Id",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The ID of the existing virtual network",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "subnetName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Subnet Name",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The name of the subnet in the existing virtual network",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
                         }
                     ]
                 }
@@ -254,7 +286,9 @@
                 "diskType": "[steps('basics').diskType]",
                 "virtualMachineSize": "[steps('basics').virtualMachineSize]",
                 "windowsOSVersion": "[steps('basics').windowsOSVersion]",
-                "location": "[steps('basics').location]"
+                "location": "[steps('basics').location]",
+                "virtualNetworkId": "[steps('basics').virtualNetworkId]",
+                "subnetName": "[steps('basics').subnetName]"
             }
         }
     }
