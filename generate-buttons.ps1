@@ -8,6 +8,9 @@ param(
 
 Add-Type -AssemblyName System.Web
 
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/5-vm-with-disk-pt2/main.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/5-vm-with-disk-pt2/createUiDefinition.json"
+
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
 $link_to_createUiDefinition_json = [System.Web.HttpUtility]::UrlEncode($link_to_createUiDefinition_json)
@@ -20,4 +23,4 @@ $visualizeUrl = "[![Visualize](https://raw.githubusercontent.com/Azure/azure-qui
 Write-Host $visualizeUrl
 
 
-#powershell -File generate-buttons.ps1 -link_to_arm_json "path_to_arm_json" -link_to_createUiDefinition_json "path_to_createUiDefinition_json"
+#powershell -File generate-buttons.ps1 -link_to_arm_json $mainjson -link_to_createUiDefinition_json $createUijson
