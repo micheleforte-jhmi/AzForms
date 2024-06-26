@@ -5,11 +5,14 @@
         "virtualMachineName": {
             "value": "JH-TESTFORM-VM"
         },
-        "adminUsername": {
-            "value": "cloudadm"
+        "keyVaultName": {
+            "value": "CloudAdminBicep"
         },
-        "adminPassword": {
-            "value": "Cl0udAdm1n!"
+        "adminUsernameSecretName": {
+            "value": "CloudADM"
+        },
+        "adminPasswordSecretName": {
+            "value": "adminPassword"
         }
     }
 }
