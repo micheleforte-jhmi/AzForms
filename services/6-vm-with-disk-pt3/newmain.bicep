@@ -1,6 +1,8 @@
 @description('The name of the VM')
 param virtualMachineName string
 
+param networkSecurityGroupName string
+
 @description('The name of the Key Vault')
 param keyVaultName string
 
