@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachineName": {
+        "value": "JH-TESTFORM-VM"
+        },
+        "networkSecurityGroupName": {
+        "value": "myNetworkSecurityGroup"
+        },
+        "keyVaultName": {
+        "value": "myKeyVault"
+        },
+        "adminUsernameSecretName": {
+        "value": "CloudADM"
+        },
+        "adminPasswordSecretName": {
+        "value": "adminPassword"
+        },
+        "dataDiskSize": {
+        "value": 1024
+        },
+        "dataDisksCount": {
+        "value": 2
+        },
+        "diskType": {
+        "value": "StandardSSD_LRS"
+        },
+        "virtualMachineSize": {
+        "value": "Standard_D2s_v3"
+        },
+        "windowsOSVersion": {
+        "value": "2022-Datacenter"
+        },
+        "location": {
+        "value": "eastus"
+        },
+        "virtualNetworkId": {
+        "value": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
+        },
+        "subnetName": {
+        "value": "mySubnet"
+        }
+    }
+    }
