@@ -8,12 +8,12 @@ param(
 
 Add-Type -AssemblyName System.Web
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/3-newmain.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/createUiDefinition.json"
-
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
 $link_to_createUiDefinition_json = [System.Web.HttpUtility]::UrlEncode($link_to_createUiDefinition_json)
+
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/4-newmain.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/createUiDefinition.json"
 
 # Construct the URL
 $url = "[![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/$link_to_arm_json/uiFormDefinitionUri/$link_to_createUiDefinition_json)"
