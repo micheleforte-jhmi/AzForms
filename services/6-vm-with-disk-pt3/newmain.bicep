@@ -1,8 +1,8 @@
 @description('The name of the VM')
 param virtualMachineName string
 
-@description('The name of the Network Security Group')
-param networkSecurityGroupName string
+// @description('The name of the Network Security Group')
+// param networkSecurityGroupName string
 
 @description('The name of the Key Vault')
 param keyVaultName string

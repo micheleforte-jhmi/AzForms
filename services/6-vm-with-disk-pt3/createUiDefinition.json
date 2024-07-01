@@ -40,22 +40,6 @@
                             "visible": true
                         },
                         {
-                            "name": "networkSecurityGroupName",
-                            "type": "Microsoft.Common.TextBox",
-                            "label": "Network Security Group Name",
-                            "subLabel": "",
-                            "defaultValue": "",
-                            "toolTip": "The name of the Network Security Group",
-                            "constraints": {
-                                "required": true,
-                                "regex": "",
-                                "validationMessage": "",
-                                "validations": []
-                            },
-                            "infoMessages": [],
-                            "visible": true
-                        },
-                        {
                             "name": "keyVaultName",
                             "type": "Microsoft.Common.TextBox",
                             "label": "Key Vault Name",
@@ -245,7 +229,6 @@
             "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
             "parameters": {
                 "virtualMachineName": "[steps('basics').virtualMachineName]",
-                "networkSecurityGroupName": "[steps('basics').networkSecurityGroupName]",
                 "keyVaultName": "[steps('basics').keyVaultName]",
                 "adminUsernameSecretName": "[steps('basics').adminUsernameSecretName]",
                 "adminPasswordSecretName": "[steps('basics').adminPasswordSecretName]",
