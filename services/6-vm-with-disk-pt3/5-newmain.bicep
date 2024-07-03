@@ -1,8 +1,8 @@
 @description('The name of the VM')
 param virtualMachineName string
 
-// @description('The name of the Network Security Group')
-// param networkSecurityGroupName string
+@description('The name of the Network Security Group')
+param networkSecurityGroupName string
 
 @description('The name of the Key Vault')
 param keyVaultName string
@@ -43,8 +43,8 @@ param virtualMachineSize string = 'Standard_D2s_v3'
 ])
 param windowsOSVersion string = '2022-Datacenter'
 
-@description('Location for all resources.')
-param location string = resourceGroup().location
+// @description('Location for all resources.')
+// param location string = resourceGroup().location
 
 // @description('The ID of the existing virtual network')
 // param virtualNetworkId string

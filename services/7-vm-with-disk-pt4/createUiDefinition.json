@@ -1,0 +1,226 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Test Form View",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": [
+                                    "microsoft.resources/resourcegroups"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "virtualMachineName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Virtual Machine Name",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The name of the VM",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "adminUsername",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Admin Username",
+                            "subLabel": "",
+                            "defaultValue": "",
+                            "toolTip": "The admin user name of the VM",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "adminPassword",
+                            "type": "Microsoft.Common.PasswordBox",
+                            "label": {
+                                "password": "Admin Password",
+                                "confirmPassword": "Confirm password"
+                            },
+                            "defaultValue": "",
+                            "toolTip": "The admin password of the VM",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "options": {
+                                "hideConfirmation": true
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "dataDiskSize",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Data Disk Size",
+                            "subLabel": "",
+                            "defaultValue": "1024",
+                            "toolTip": "The size in GB of the data disks",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "dataDisksCount",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Data Disks Count",
+                            "subLabel": "",
+                            "defaultValue": "2",
+                            "toolTip": "The number of data disks to create",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "diskType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Disk Type",
+                            "subLabel": "",
+                            "defaultValue": "StandardSSD_LRS",
+                            "toolTip": "The Storage type of the data Disks",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "StandardSSD_LRS",
+                                        "value": "StandardSSD_LRS"
+                                    },
+                                    {
+                                        "label": "Standard_LRS",
+                                        "value": "Standard_LRS"
+                                    },
+                                    {
+                                        "label": "Premium_LRS",
+                                        "value": "Premium_LRS"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "virtualMachineSize",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Virtual Machine Size",
+                            "subLabel": "",
+                            "defaultValue": "Standard_D2s_v3",
+                            "toolTip": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "Standard_D2s_v3",
+                                        "value": "Standard_D2s_v3"
+                                    },
+                                    {
+                                        "label": "Standard_D2s_v4",
+                                        "value": "Standard_D2s_v4"
+                                    },
+                                    {
+                                        "label": "Standard_D2s_v5",
+                                        "value": "Standard_D2s_v5"
+                                    },
+                                    {
+                                        "label": "Standard_D4s_v5",
+                                        "value": "Standard_D4s_v5"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "windowsOSVersion",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Windows OS Version",
+                            "subLabel": "",
+                            "defaultValue": "2022-Datacenter",
+                            "toolTip": "The Windows version for the VM.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "2019-Datacenter",
+                                        "value": "2019-Datacenter"
+                                    },
+                                    {
+                                        "label": "2022-Datacenter",
+                                        "value": "2022-Datacenter"
+                                    }
+                                ],
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        },
+                        {
+                            "name": "location",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Location",
+                            "subLabel": "",
+                            "defaultValue": "[[resourceGroup().location]",
+                            "toolTip": "Location for all resources.",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": "",
+                                "validations": []
+                            },
+                            "infoMessages": [],
+                            "visible": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "kind": "ResourceGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]",
+            "parameters": {
+                "virtualMachineName": "[steps('basics').virtualMachineName]",
+                "adminUsername": "[steps('basics').adminUsername]",
+                "adminPassword": "[steps('basics').adminPassword]",
+                "dataDiskSize": "[steps('basics').dataDiskSize]",
+                "dataDisksCount": "[steps('basics').dataDisksCount]",
+                "diskType": "[steps('basics').diskType]",
+                "virtualMachineSize": "[steps('basics').virtualMachineSize]",
+                "windowsOSVersion": "[steps('basics').windowsOSVersion]",
+                "location": "[steps('basics').location]"
+            }
+        }
+    }
+}

@@ -12,7 +12,7 @@ Add-Type -AssemblyName System.Web
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
 $link_to_createUiDefinition_json = [System.Web.HttpUtility]::UrlEncode($link_to_createUiDefinition_json)
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/4-newmain.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/5-newmain.json"
 $createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/createUiDefinition.json"
 
 # Construct the URL
