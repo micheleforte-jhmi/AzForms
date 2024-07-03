@@ -1,0 +1,151 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.28.1.47646",
+      "templateHash": "9420426164027558390"
+    }
+  },
+  "parameters": {
+    "virtualMachineName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the VM"
+      }
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "The location of the VM in Azure"
+      }
+    },
+    "virtualMachineSize": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_D2s_v3",
+        "Standard_D2s_v4",
+        "Standard_D2s_v5",
+        "Standard_D4s_v5"
+      ],
+      "metadata": {
+        "description": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The admin user name of the VM"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The admin password of the VM"
+      }
+    },
+    "diskType": {
+      "type": "string",
+      "allowedValues": [
+        "StandardSSD_LRS",
+        "Standard_LRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "The Storage type of the data Disks"
+      }
+    },
+    "windowsOSVersion": {
+      "type": "string",
+      "allowedValues": [
+        "2019-Datacenter",
+        "2022-Datacenter"
+      ],
+      "metadata": {
+        "description": "The Windows version for the VM."
+      }
+    },
+    "dataDisksCount": {
+      "type": "int",
+      "maxValue": 2,
+      "metadata": {
+        "description": "The number of data disks to create"
+      }
+    },
+    "dataDiskSize": {
+      "type": "int",
+      "maxValue": 5024,
+      "metadata": {
+        "description": "The size in GB of the data disks"
+      }
+    },
+    "OSDiskName": {
+      "type": "string"
+    },
+    "nicId": {
+      "type": "string",
+      "metadata": {
+        "description": "The id of the network interface/nic"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2021-07-01",
+      "name": "[parameters('virtualMachineName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('virtualMachineSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('virtualMachineName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "storageProfile": {
+          "copy": [
+            {
+              "name": "dataDisks",
+              "count": "[length(range(0, parameters('dataDisksCount')))]",
+              "input": {
+                "name": "[format('{0}-DataDisk{1}', parameters('virtualMachineName'), range(0, parameters('dataDisksCount'))[copyIndex('dataDisks')])]",
+                "diskSizeGB": "[parameters('dataDiskSize')]",
+                "lun": "[range(0, parameters('dataDisksCount'))[copyIndex('dataDisks')]]",
+                "createOption": "Empty",
+                "managedDisk": {
+                  "storageAccountType": "[parameters('diskType')]"
+                }
+              }
+            }
+          ],
+          "osDisk": {
+            "osType": "Windows",
+            "name": "[parameters('OSDiskName')]",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "[parameters('diskType')]"
+            },
+            "diskSizeGB": 128
+          },
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "[parameters('windowsOSVersion')]",
+            "version": "latest"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[parameters('nicId')]"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
