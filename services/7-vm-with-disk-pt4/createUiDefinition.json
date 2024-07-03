@@ -219,7 +219,7 @@
                 "diskType": "[steps('basics').diskType]",
                 "virtualMachineSize": "[steps('basics').virtualMachineSize]",
                 "windowsOSVersion": "[steps('basics').windowsOSVersion]",
-                "location": "[steps('basics').location]"
+                "location": "[steps('basics').resourceScope.location.name]"
             }
         }
     }
