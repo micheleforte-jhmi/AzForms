@@ -12,8 +12,8 @@ Add-Type -AssemblyName System.Web
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
 $link_to_createUiDefinition_json = [System.Web.HttpUtility]::UrlEncode($link_to_createUiDefinition_json)
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/5-newmain.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/6-vm-with-disk-pt3/createUiDefinition.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/9-vm/main.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/9-vm/CreateUiDefinition.json"
 
 # Construct the URL
 $url = "[![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/$link_to_arm_json/uiFormDefinitionUri/$link_to_createUiDefinition_json)"
@@ -23,4 +23,6 @@ $visualizeUrl = "[![Visualize](https://raw.githubusercontent.com/Azure/azure-qui
 Write-Host $visualizeUrl
 
 
-#powershell -File generate-buttons.ps1 -link_to_arm_json $mainjson -link_to_createUiDefinition_json $createUijson
+powershell -File generate-buttons.ps1 -link_to_arm_json $mainjson -link_to_createUiDefinition_json $createUijson
+
+https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f7-vm-with-disk-pt4%2fmain.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f7-vm-with-disk-pt4%2fcreateUiDefinition.json
