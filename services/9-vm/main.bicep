@@ -2,7 +2,11 @@
 param virtualMachineName string
 
 @description('The location of the VM in Azure')
-param location string
+@allowed([
+  'JH-TRAINING-TEST-RG'
+  'JH-TRAINING-PROD-RG'
+])
+param location string = 'JH-TRAINING-PROD-RG'
 
 @description('The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS')
 @allowed([
