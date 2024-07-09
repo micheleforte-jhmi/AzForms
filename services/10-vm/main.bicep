@@ -46,13 +46,8 @@ param vnetResourceGroup string = 'JH-TRAINING-PROD-RG'
 
 param subnetName string
 
-@description('Location for all resources')
-@allowed([
-    'eastus'
-    'westus'
-    'centralus'
-  ])
-param location string
+@description('Location for all resources.')
+param location string = resourceGroup().location
 
 @description('Admin Username for the virtual machine')
 param adminUsername string = 'CloudADM'
