@@ -12,8 +12,8 @@ Add-Type -AssemblyName System.Web
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
 $link_to_createUiDefinition_json = [System.Web.HttpUtility]::UrlEncode($link_to_createUiDefinition_json)
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/9-vm/main.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/9-vm/CreateUiDefinition.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/10-vm/main.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/10-vm/CreateUiDefinition.json"
 
 # Construct the URL
 $url = "[![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/$link_to_arm_json/uiFormDefinitionUri/$link_to_createUiDefinition_json)"
