@@ -205,7 +205,7 @@
                             "label": "Location",
                             "subLabel": "",
                             "defaultValue": "[[resourceGroup().location]",
-                            "toolTip": "Location for all resources",
+                            "toolTip": "Location for all resources.",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
