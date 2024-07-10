@@ -10,12 +10,6 @@ param vmName string
 ])
 param virtualMachineSize string = 'Standard_D2s_v3'
 
-@description('Key Vault name')
-param keyVaultName string = 'AzFormDeployKV'
-
-@description('Secret name for the admin password')
-param adminPasswordSecretName string = 'adminpassword'
-
 @description('The Windows version for the VM.')
 @allowed([
   '2019-Datacenter'
@@ -42,8 +36,6 @@ param vnetResourceGroup string = 'JH-TRAINING-PROD-RG'
   'AZ-East2-JH-TRAINING-10.156.231.0-20'
   'AZ-East-JH-Training-10.150.224.0-20'
 ])
-
-
 param subnetName string
 
 @description('Location for all resources.')
@@ -51,6 +43,10 @@ param location string = resourceGroup().location
 
 @description('Admin Username for the virtual machine')
 param adminUsername string = 'CloudADM'
+
+@description('Admin Password for the virtual machine')
+@secure()
+param adminPassword string
 
 // Get the existing virtual network
 resource vnet 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
@@ -62,17 +58,6 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2020-11-01' existing = {
   name: subnetName
   parent: vnet
-}
-
-// Get the Key Vault
-resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' existing = {
-  name: keyVaultName
-}
-
-// Get the admin password from Key Vault
-resource adminPasswordSecret 'Microsoft.KeyVault/vaults/secrets@2021-04-01-preview' existing = {
-  name: adminPasswordSecretName
-  parent: keyVault
 }
 
 // Create a network interface without a public IP address
@@ -105,9 +90,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
     osProfile: {
       computerName: vmName
       adminUsername: adminUsername
-      adminPassword: {
-        value: adminPasswordSecret.properties.value
-      }
+      adminPassword: adminPassword
     }
     storageProfile: {
       imageReference: {

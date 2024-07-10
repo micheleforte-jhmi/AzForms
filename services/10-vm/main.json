@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.28.1.47646",
-      "templateHash": "10878879535315634937"
+      "templateHash": "6629979383878944478"
     }
   },
   "parameters": {
@@ -26,20 +26,6 @@
       ],
       "metadata": {
         "description": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS"
-      }
-    },
-    "keyVaultName": {
-      "type": "string",
-      "defaultValue": "AzFormDeployKV",
-      "metadata": {
-        "description": "Key Vault name"
-      }
-    },
-    "adminPasswordSecretName": {
-      "type": "string",
-      "defaultValue": "adminpassword",
-      "metadata": {
-        "description": "Secret name for the admin password"
       }
     },
     "windowsOSVersion": {
@@ -98,6 +84,12 @@
       "metadata": {
         "description": "Admin Username for the virtual machine"
       }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin Password for the virtual machine"
+      }
     }
   },
   "resources": [
@@ -132,9 +124,7 @@
         "osProfile": {
           "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": {
-            "value": "[reference(resourceId('Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('adminPasswordSecretName')), '2021-04-01-preview').value]"
-          }
+          "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": {

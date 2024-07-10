@@ -1,6 +1,10 @@
 // create bicep module for storage
 param storageAccountName string
+// param location string = resourceGroup().location
+
+@description('Location for all resources.')
 param location string = resourceGroup().location
+
 param skuName string = 'Standard_LRS' // Default to "Standard_LRS", can be overridden
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
