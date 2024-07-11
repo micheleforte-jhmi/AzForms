@@ -20,8 +20,9 @@ param windowsOSVersion string = '2022-Datacenter'
 @description('Select an existing Virtual Network')
 @allowed([
   'AZ-East-JH-Training-10.150.224.0-20'
+  'AZ-East2-JH-TRAINING-10.156.224.0-20'
 ])
-param vnetName string = 'AZ-East-JH-Training-10.150.224.0-20'
+param vnetName string = 'AZ-East2-JH-TRAINING-10.156.224.0-20'
 
 @description('Select an existing Virtual Network resource group')
 @allowed([
@@ -32,9 +33,10 @@ param vnetResourceGroup string = 'JH-TRAINING-PROD-RG'
 
 @description('Select a subnet name from the selected Virtual Network')
 @allowed([
+  'AZ-East2-JH-TRAINING-10.156.231.0-20'
   'AZ-East-JH-Training-10.150.224.0-20'
 ])
-param subnetName string = 'AZ-East-JH-Training-10.150.224.0-20'
+param subnetName string
 
 @description('Location for all resources.')
 param location string = resourceGroup().location

@@ -10,12 +10,9 @@ param vmName string
 ])
 param virtualMachineSize string = 'Standard_D2s_v3'
 
-@description('The Windows version for the VM.')
-@allowed([
-  '2019-Datacenter'
-  '2022-Datacenter'
-])
-param windowsOSVersion string = '2022-Datacenter'
+@description('The custom image ID for the VM.')
+// param customImageId string = '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/images/CitrixImageTest'
+param customImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB'
 
 @description('Select an existing Virtual Network')
 @allowed([
@@ -91,17 +88,14 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
       adminPassword: adminPassword
     }
     storageProfile: {
-      imageReference: {
-        publisher: 'MicrosoftWindowsServer'
-        offer: 'WindowsServer'
-        sku: windowsOSVersion
-        version: 'latest'
-      }
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
           storageAccountType: 'Standard_LRS'
         }
+      }
+      imageReference: {
+        id: customImageId
       }
     }
     networkProfile: {
