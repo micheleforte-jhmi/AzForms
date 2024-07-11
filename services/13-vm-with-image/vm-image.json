@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.28.1.47646",
-      "templateHash": "15822629189851240348"
+      "templateHash": "9396718892746424786"
     }
   },
   "parameters": {
@@ -28,11 +28,11 @@
         "description": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS"
       }
     },
-    "customImageId": {
+    "sharedImageId": {
       "type": "string",
       "defaultValue": "/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB",
       "metadata": {
-        "description": "The custom image ID for the VM."
+        "description": "The shared image ID for the VM."
       }
     },
     "vnetName": {
@@ -129,7 +129,7 @@
             }
           },
           "imageReference": {
-            "id": "[parameters('customImageId')]"
+            "id": "[parameters('sharedImageId')]"
           }
         },
         "networkProfile": {

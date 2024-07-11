@@ -10,9 +10,8 @@ param vmName string
 ])
 param virtualMachineSize string = 'Standard_D2s_v3'
 
-@description('The custom image ID for the VM.')
-// param customImageId string = '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Compute/images/CitrixImageTest'
-param customImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB'
+@description('The shared image ID for the VM.')
+param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB'
 
 @description('Select an existing Virtual Network')
 @allowed([
@@ -95,7 +94,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
         }
       }
       imageReference: {
-        id: customImageId
+        id: sharedImageId
       }
     }
     networkProfile: {

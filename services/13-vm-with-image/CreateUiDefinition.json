@@ -72,12 +72,12 @@
                             "visible": true
                         },
                         {
-                            "name": "customImageId",
+                            "name": "sharedImageId",
                             "type": "Microsoft.Common.TextBox",
-                            "label": "Custom Image Id",
+                            "label": "Shared Image Id",
                             "subLabel": "",
                             "defaultValue": "/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB",
-                            "toolTip": "The custom image ID for the VM.",
+                            "toolTip": "The shared image ID for the VM.",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
@@ -223,7 +223,7 @@
             "parameters": {
                 "vmName": "[steps('basics').vmName]",
                 "virtualMachineSize": "[steps('basics').virtualMachineSize]",
-                "customImageId": "[steps('basics').customImageId]",
+                "sharedImageId": "[steps('basics').sharedImageId]",
                 "vnetName": "[steps('basics').vnetName]",
                 "vnetResourceGroup": "[steps('basics').vnetResourceGroup]",
                 "subnetName": "[steps('basics').subnetName]",
