@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.28.1.47646",
-      "templateHash": "6533827557730456779"
+      "templateHash": "6457854068268949240"
     }
   },
   "parameters": {
@@ -38,9 +38,9 @@
     },
     "vnetName": {
       "type": "string",
-      "defaultValue": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
+      "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
       "allowedValues": [
-        "AZ-East-JH-CITRIX-PROD-10.150.80.0-20"
+        "AZ-East2-JH-CITRIX-DR-10.154.208.0-20"
       ],
       "metadata": {
         "description": "Select an existing Virtual Network"
@@ -58,9 +58,9 @@
     },
     "subnetName": {
       "type": "string",
-      "defaultValue": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
+      "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24",
       "allowedValues": [
-        "AZ-East-JH-CITRIX-PROD-10.150.80.0-20"
+        "AZ-East2-JH-CITRIX-DR-10.154.208.0-24"
       ],
       "metadata": {
         "description": "Select a subnet name from the selected Virtual Network"

@@ -15,9 +15,9 @@ param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6
 
 @description('Select an existing Virtual Network')
 @allowed([
-  'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
+  'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
 ])
-param vnetName string = 'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
+param vnetName string = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
 
 @description('Select an existing Virtual Network resource group')
 @allowed([
@@ -27,9 +27,9 @@ param vnetResourceGroup string = 'JH-CITRIX-PROD-RG'
 
 @description('Select a subnet name from the selected Virtual Network')
 @allowed([
-  'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
+  'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
 ])
-param subnetName string = 'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
+param subnetName string = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
