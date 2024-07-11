@@ -92,14 +92,14 @@
                             "type": "Microsoft.Common.DropDown",
                             "label": "Vnet Name",
                             "subLabel": "",
-                            "defaultValue": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
+                            "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
                             "toolTip": "Select an existing Virtual Network",
                             "constraints": {
                                 "required": false,
                                 "allowedValues": [
                                     {
-                                        "label": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
-                                        "value": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20"
+                                        "label": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
+                                        "value": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20"
                                     }
                                 ],
                                 "validations": []
@@ -132,14 +132,14 @@
                             "type": "Microsoft.Common.DropDown",
                             "label": "Subnet Name",
                             "subLabel": "",
-                            "defaultValue": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
+                            "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24",
                             "toolTip": "Select a subnet name from the selected Virtual Network",
                             "constraints": {
                                 "required": false,
                                 "allowedValues": [
                                     {
-                                        "label": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20",
-                                        "value": "AZ-East-JH-CITRIX-PROD-10.150.80.0-20"
+                                        "label": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24",
+                                        "value": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24"
                                     }
                                 ],
                                 "validations": []
