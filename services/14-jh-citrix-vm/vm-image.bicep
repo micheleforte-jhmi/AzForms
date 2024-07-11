@@ -1,5 +1,5 @@
-@description('Name of the virtual machine')
-param vmName string
+@description('Name of the virtual machine. Ensure the name starts with JHCTX.')
+param vmName string = 'JHCTX'
 
 @description('The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS')
 @allowed([
@@ -15,22 +15,21 @@ param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6
 
 @description('Select an existing Virtual Network')
 @allowed([
-  'AZ-East-JH-Training-10.150.224.0-20'
+  'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
 ])
-param vnetName string = 'AZ-East-JH-Training-10.150.224.0-20'
+param vnetName string = 'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
 
 @description('Select an existing Virtual Network resource group')
 @allowed([
-    'JH-TRAINING-PROD-RG'
-    'JH-TRAINING-TEST-RG'
+    'JH-CITRIX-PROD-RG'
   ])
-param vnetResourceGroup string = 'JH-TRAINING-PROD-RG'
+param vnetResourceGroup string = 'JH-CITRIX-PROD-RG'
 
 @description('Select a subnet name from the selected Virtual Network')
 @allowed([
-  'AZ-East-JH-Training-10.150.224.0-20'
+  'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
 ])
-param subnetName string = 'AZ-East-JH-Training-10.150.224.0-20'
+param subnetName string = 'AZ-East-JH-CITRIX-PROD-10.150.80.0-20'
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
