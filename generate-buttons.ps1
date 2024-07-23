@@ -8,8 +8,8 @@ param(
 
 Add-Type -AssemblyName System.Web
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/15-vm-select-vnet/vm-vnet.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/15-vm-select-vnet/CreateUiDefinition.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/14-jh-citrix-vm/vm-image.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/14-jh-citrix-vm/CreateUiDefinition.json"
 
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
@@ -36,3 +36,8 @@ Write-Host $url
 # https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f11-storage%2fstorage.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f11-storage%2fCreateUiDefinition.json
 
 # https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f13-vm-with-image%2fvm-image.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f13-vm-with-image%2fCreateUiDefinition.json
+
+# https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f15-vm-select-vnet%2fvm-vnet.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f15-vm-select-vnet%2fCreateUiDefinition.json
+
+# https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f14-jh-citrix-vm%2fvm-image.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f14-jh-citrix-vm%2fCreateUiDefinition.json
+
