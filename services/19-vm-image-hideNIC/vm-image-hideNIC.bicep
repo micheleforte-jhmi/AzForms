@@ -34,6 +34,7 @@ param tags object = {
   Project: 'AzFormDeployment'
   Image: 'ITJH_WS2022_2024-04_128GB'
   Version: 'Created by 19-vm'
+  cmdb_pas: 'CCO'
 }
 
 // Get the existing virtual network

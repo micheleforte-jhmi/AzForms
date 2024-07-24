@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.45.22436",
-      "templateHash": "8159993285350897239"
+      "templateHash": "3259642616794398493"
     }
   },
   "parameters": {
@@ -62,7 +62,8 @@
         "Environment": "Test",
         "Project": "AzFormDeployment",
         "Image": "ITJH_WS2022_2024-04_128GB",
-        "Version": "Created by 19-vm"
+        "Version": "Created by 19-vm",
+        "cmdb_pas": "CCO"
       },
       "metadata": {
         "description": "Tags to be applied to resources"

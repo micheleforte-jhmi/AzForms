@@ -3,7 +3,7 @@
     "view": {
         "kind": "Form",
         "properties": {
-            "title": "ITJH_WS2022_2024-04_128GB Server Deployment",
+            "title": "Test Form View",
             "steps": [
                 {
                     "name": "basics",
@@ -153,7 +153,7 @@
                             "type": "Microsoft.Common.TextBox",
                             "label": "Tags",
                             "subLabel": "",
-                            "defaultValue": "{\"Environment\":\"Test\",\"Project\":\"AzFormDeployment\",\"Image\":\"ITJH_WS2022_2024-04_128GB\",\"Version\":\"Created by 19-vm\"}",
+                            "defaultValue": "{\"Environment\":\"Test\",\"Project\":\"AzFormDeployment\",\"Image\":\"ITJH_WS2022_2024-04_128GB\",\"Version\":\"Created by 19-vm\",\"cmdb_pas\":\"CCO\"}",
                             "toolTip": "Tags to be applied to resources",
                             "constraints": {
                                 "required": false,
