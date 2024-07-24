@@ -10,26 +10,12 @@ param vmName string = 'JHCTX'
 ])
 param virtualMachineSize string = 'Standard_D2s_v3'
 
-@description('The shared image ID for EMMS image ITJH_WS2022_2024-04_128GB.')
-param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB'
-
-@description('Virtual network will be AZ-East2-JH-CITRIX-DR-10.154.208.0-20.')
+@description('The Windows version for the VM.')
 @allowed([
-  'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
+  '2019-Datacenter'
+  '2022-Datacenter'
 ])
-param vnetName string = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
-
-@description('Select an existing Virtual Network resource group')
-@allowed([
-    'JH-CITRIX-PROD-RG'
-  ])
-param vnetResourceGroup string = 'JH-CITRIX-PROD-RG'
-
-@description('Select a subnet name from the selected Virtual Network')
-@allowed([
-  'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
-])
-param subnetName string = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
+param windowsOSVersion string = '2022-Datacenter'
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
@@ -45,9 +31,14 @@ param adminPassword string
 param tags object = {
   environment: 'Test'
   project: 'AzFormDeployment'
-  Image: 'ITJH_WS2022_2024-04_128GB'
-  version: 'Created by 16-vm'
+  Image: windowsOSVersion
+  version: 'Created by 18-vm'
 }
+
+// Hardcoded networking values
+var vnetName = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
+var vnetResourceGroup = 'JH-CITRIX-PROD-RG'
+var subnetName = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
 
 // Get the existing virtual network
 resource vnet 'Microsoft.Network/virtualNetworks@2020-11-01' existing = {
@@ -96,14 +87,17 @@ resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
       adminPassword: adminPassword
     }
     storageProfile: {
+      imageReference: {
+        publisher: 'MicrosoftWindowsServer'
+        offer: 'WindowsServer'
+        sku: windowsOSVersion
+        version: 'latest'
+      }
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
           storageAccountType: 'Standard_LRS'
         }
-      }
-      imageReference: {
-        id: sharedImageId
       }
     }
     networkProfile: {
