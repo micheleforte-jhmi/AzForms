@@ -221,7 +221,7 @@
                             "type": "Microsoft.Common.TextBox",
                             "label": "Tags",
                             "subLabel": "",
-                            "defaultValue": "{\"environment\":\"AzFormTest\",\"project\":\"Created by a 16-vm\"}",
+                            "defaultValue": "{\"environment\":\"Test\",\"project\":\"AzFormDeployment\",\"version\":\"Created by a 17-vm\"}",
                             "toolTip": "Tags to be applied to resources",
                             "constraints": {
                                 "required": false,

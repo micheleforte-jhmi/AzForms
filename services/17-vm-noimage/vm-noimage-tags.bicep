@@ -47,8 +47,9 @@ param adminPassword string
 
 @description('Tags to be applied to resources')
 param tags object = {
-  environment: 'AzFormTest'
-  project: 'Created by a 16-vm'
+  environment: 'Test'
+  project: 'AzFormDeployment'
+  version: 'Created by a 17-vm'
 }
 
 // Get the existing virtual network
