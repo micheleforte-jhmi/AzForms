@@ -3,7 +3,7 @@
     "view": {
         "kind": "Form",
         "properties": {
-            "title": "Test Form View",
+            "title": "VM - NoImage - Hide NIC",
             "steps": [
                 {
                     "name": "basics",
@@ -24,7 +24,7 @@
                             "label": "Vm Name",
                             "subLabel": "",
                             "defaultValue": "JHCTX",
-                            "toolTip": "Name of the virtual machine. Ensure the name starts with JHCTX.",
+                            "toolTip": "Name of the virtual machine. Ensure the name starts with JHCTX. No more than 15 characters",
                             "constraints": {
                                 "required": false,
                                 "regex": "",
@@ -45,7 +45,7 @@
                             "label": "Virtual Machine Size",
                             "subLabel": "",
                             "defaultValue": "Standard_D2s_v3",
-                            "toolTip": "The virtual machine size. Enter a Premium capable VM size if DiskType is entered as Premium_LRS",
+                            "toolTip": "Choose the virtual machine size. Default is Standard_D2s_v3.",
                             "constraints": {
                                 "required": false,
                                 "allowedValues": [
@@ -88,66 +88,6 @@
                                     {
                                         "label": "2022-Datacenter",
                                         "value": "2022-Datacenter"
-                                    }
-                                ],
-                                "validations": []
-                            },
-                            "infoMessages": [],
-                            "visible": true
-                        },
-                        {
-                            "name": "vnetName",
-                            "type": "Microsoft.Common.DropDown",
-                            "label": "Vnet Name",
-                            "subLabel": "",
-                            "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
-                            "toolTip": "Select an existing Virtual Network",
-                            "constraints": {
-                                "required": false,
-                                "allowedValues": [
-                                    {
-                                        "label": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
-                                        "value": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20"
-                                    }
-                                ],
-                                "validations": []
-                            },
-                            "infoMessages": [],
-                            "visible": true
-                        },
-                        {
-                            "name": "vnetResourceGroup",
-                            "type": "Microsoft.Common.DropDown",
-                            "label": "Vnet Resource Group",
-                            "subLabel": "",
-                            "defaultValue": "JH-CITRIX-PROD-RG",
-                            "toolTip": "Select an existing Virtual Network resource group",
-                            "constraints": {
-                                "required": false,
-                                "allowedValues": [
-                                    {
-                                        "label": "JH-CITRIX-PROD-RG",
-                                        "value": "JH-CITRIX-PROD-RG"
-                                    }
-                                ],
-                                "validations": []
-                            },
-                            "infoMessages": [],
-                            "visible": true
-                        },
-                        {
-                            "name": "subnetName",
-                            "type": "Microsoft.Common.DropDown",
-                            "label": "Subnet Name",
-                            "subLabel": "",
-                            "defaultValue": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24",
-                            "toolTip": "Select a subnet name from the selected Virtual Network",
-                            "constraints": {
-                                "required": false,
-                                "allowedValues": [
-                                    {
-                                        "label": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24",
-                                        "value": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24"
                                     }
                                 ],
                                 "validations": []
@@ -221,7 +161,7 @@
                             "type": "Microsoft.Common.TextBox",
                             "label": "Tags",
                             "subLabel": "",
-                            "defaultValue": "{\"environment\":\"Test\",\"project\":\"AzFormDeployment\",\"version\":\"Created by a 17-vm\"}",
+                            "defaultValue": "{\"environment\":\"Test\",\"project\":\"AzFormDeployment\",\"Image\":\"[parameters('windowsOSVersion')]\",\"version\":\"Created by 18-vm\"}",
                             "toolTip": "Tags to be applied to resources",
                             "constraints": {
                                 "required": false,
@@ -244,9 +184,6 @@
                 "vmName": "[steps('basics').vmName]",
                 "virtualMachineSize": "[steps('basics').virtualMachineSize]",
                 "windowsOSVersion": "[steps('basics').windowsOSVersion]",
-                "vnetName": "[steps('basics').vnetName]",
-                "vnetResourceGroup": "[steps('basics').vnetResourceGroup]",
-                "subnetName": "[steps('basics').subnetName]",
                 "location": "[steps('basics').location]",
                 "adminUsername": "[steps('basics').adminUsername]",
                 "adminPassword": "[steps('basics').adminPassword]",
