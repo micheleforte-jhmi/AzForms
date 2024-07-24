@@ -8,8 +8,8 @@ param(
 
 Add-Type -AssemblyName System.Web
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/14-jh-citrix-vm/vm-image.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/14-jh-citrix-vm/CreateUiDefinition.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/16-vm-with-image-tags/vm-image-tags.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/16-vm-with-image-tags/CreateUiDefinition.json"
 
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
