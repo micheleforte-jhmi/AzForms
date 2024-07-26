@@ -8,8 +8,8 @@ param(
 
 Add-Type -AssemblyName System.Web
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/19-vm-image-hideNIC/vm-image-hidenic.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/19-vm-image-hideNIC/CreateUiDefinition.json"
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/21-vm-mult-images/vm-mult-image.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/21-vm-mult-images/CreateUiDefinition.json"
 
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)
@@ -48,3 +48,6 @@ Write-Host $url
 # https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f18-vm-noimage-hide-nic%2fvm-noimage-hide-nic.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f18-vm-noimage-hide-nic%2fCreateUiDefinition.json
 
 # https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f19-vm-image-hideNIC%2fvm-image-hidenic.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f19-vm-image-hideNIC%2fCreateUiDefinition.json
+
+# https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f20-vm-cmdb-pas%2fvm-cmdb-pas.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f20-vm-cmdb-pas%2fCreateUiDefinition.json
+

@@ -30,8 +30,11 @@ var vnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.80.0-20'
 var vnetResourceGroup = 'JH-CITRIX-PROD-RG'
 var subnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.81.0-24'
 
-@description('Location for all resources.')
-param location string = resourceGroup().location
+// @description('Location for all resources.')
+// param location string = resourceGroup().location
+
+// Variable for location
+var location = resourceGroup().location
 
 @description('Admin Username for the virtual machine')
 param adminUsername string = 'CloudADM'
