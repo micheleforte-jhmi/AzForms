@@ -10,10 +10,20 @@ param vmName string = 'JHCTX'
 ])
 param virtualMachineSize string = 'Standard_D2s_v3'
 
-@description('The shared image ID for EMMS image ITJH_WS2022_2024-04_128GB.')
-param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/galleries/ITJH_Windows_OS_Image_Gallery/images/WS2022_2024-04_128GB'
-// var sharedImageId = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/galleries/ITJH_Windows_OS_Image_Gallery/images/WS2022_2024-04_128GB'
+@description('Choose the shared image.')
+@allowed([
+  'ITJH_WS2022_2024-04_128GB'
+  'Image_Name'
+])
+param sharedImageShortName string = 'ITJH_WS2022_2024-04_128GB'
 
+// Mapping of short names to full image IDs
+var sharedImageIds = {
+  'ITJH_WS2022_2024-04_128GB': '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/galleries/ITJH_Windows_OS_Image_Gallery/images/WS2022_2024-04_128GB'
+  Image_Name: '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/Another-RG/providers/Microsoft.Compute/galleries/Another_Gallery/images/Another_Image'
+}
+
+var sharedImageId = sharedImageIds[sharedImageShortName]
 
 // Hardcoded networking values
 var vnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.80.0-20'
@@ -31,15 +41,15 @@ param adminUsername string = 'CloudADM'
 param adminPassword string
 
 @description('Additional part of the cmdb_pas tag to be appended after "Cloud-Citrix-"')
-param cmdbPasSuffix string = 'Cloud-Citrix-'
+param cmdbPasSuffix string ='Cloud-Citrix-'
 
 @description('Tags to be applied to resources')
 var tags = {
   Environment: 'Test'
   Project: 'AzFormDeployment'
-  Image: 'ITJH_WS2022_2024-04_128GB'
-  Version: 'Created by 20-vm'
-  cmdb_pas: ${cmdbPasSuffix}
+  Image: sharedImageShortName
+  Version: 'Created by 21-vm'
+  cmdb_pas: cmdbPasSuffix
 }
 
 // Get the existing virtual network
