@@ -11,7 +11,7 @@ param vmName string = 'JHCTX'
 param virtualMachineSize string = 'Standard_D2s_v3'
 
 @description('The shared image ID for EMMS image ITJH_WS2022_2024-04_128GB.')
-param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/images/ITJH_WS2022_2024-04_128GB'
+param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/galleries/ITJH_Windows_OS_Image_Gallery/images/WS2022_2024-04_128GB'
 
 // Hardcoded networking values
 var vnetName = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
