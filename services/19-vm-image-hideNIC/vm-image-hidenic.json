@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.45.22436",
-      "templateHash": "5138177806689478606"
+      "templateHash": "2589390325266221084"
     }
   },
   "parameters": {
@@ -71,9 +71,9 @@
     }
   },
   "variables": {
-    "vnetName": "AZ-East2-JH-CITRIX-DR-10.154.208.0-20",
+    "vnetName": "AZ-East2-JH-CITRIX-PROD-10.156.80.0-20",
     "vnetResourceGroup": "JH-CITRIX-PROD-RG",
-    "subnetName": "AZ-East2-JH-CITRIX-DR-10.154.208.0-24"
+    "subnetName": "AZ-East2-JH-CITRIX-PROD-10.156.81.0-24"
   },
   "resources": [
     {

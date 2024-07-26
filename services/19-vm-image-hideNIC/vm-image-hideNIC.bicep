@@ -14,9 +14,9 @@ param virtualMachineSize string = 'Standard_D2s_v3'
 param sharedImageId string = '/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/ITJH-IMAGES-PROD-RG/providers/Microsoft.Compute/galleries/ITJH_Windows_OS_Image_Gallery/images/WS2022_2024-04_128GB'
 
 // Hardcoded networking values
-var vnetName = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-20'
+var vnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.80.0-20'
 var vnetResourceGroup = 'JH-CITRIX-PROD-RG'
-var subnetName = 'AZ-East2-JH-CITRIX-DR-10.154.208.0-24'
+var subnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.81.0-24'
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
