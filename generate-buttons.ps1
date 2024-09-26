@@ -51,3 +51,4 @@ Write-Host $url
 
 # https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f20-vm-cmdb-pas%2fvm-cmdb-pas.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f20-vm-cmdb-pas%2fCreateUiDefinition.json
 
+# https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f21-vm-mult-images%2fvm-mult-image.json/uiFormDefinitionUri/https%3a%2f%2fraw.githubusercontent.com%2fmicheleforte-jhmi%2fAzForms%2fmaster%2fservices%2f21-vm-mult-images%2fCreateUiDefinition.json

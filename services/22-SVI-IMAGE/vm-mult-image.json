@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.45.22436",
-      "templateHash": "17129851279802511851"
+      "templateHash": "15021908185012313117"
     }
   },
   "parameters": {
@@ -67,15 +67,15 @@
       "Image_Name": "/subscriptions/87c4f245-4b87-4887-9b25-6aeaaa0e3e6c/resourceGroups/Another-RG/providers/Microsoft.Compute/galleries/Another_Gallery/images/Another_Image"
     },
     "sharedImageId": "[variables('sharedImageIds')[parameters('sharedImageShortName')]]",
-    "vnetName": "AZ-East2-JH-CITRIX-PROD-10.156.80.0-20",
-    "vnetResourceGroup": "JH-CITRIX-PROD-RG",
-    "subnetName": "AZ-East2-JH-CITRIX-PROD-10.156.81.0-24",
+    "vnetName": "AZ-East-JH-CLOUD-PROD-10.150.240.0-20",
+    "vnetResourceGroup": "jh-cloud-prod-rg",
+    "subnetName": "AZ-East-JH-CLOUD-PROD-10.150.254.0-24",
     "location": "[resourceGroup().location]",
     "tags": {
-      "Environment": "Test",
+      "Environment": "PROD",
       "Project": "AzFormDeployment",
       "Image": "[parameters('sharedImageShortName')]",
-      "Version": "Created by 21-vm",
+      "Version": "Created by 22-SVI-IMAGE",
       "cmdb_pas": "[parameters('cmdbPasSuffix')]"
     }
   },
