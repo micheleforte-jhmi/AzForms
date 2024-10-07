@@ -5,11 +5,11 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$link_to_createUiDefinition_json
 )
+$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/refs/heads/master/services/22-SVI-IMAGE/vm-mult-image.json"
+$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/refs/heads/master/services/22-SVI-IMAGE/CreateUiDefinition.json"
 
 Add-Type -AssemblyName System.Web
 
-$mainjson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/21-vm-mult-images/vm-mult-image.json"
-$createUijson = "https://raw.githubusercontent.com/micheleforte-jhmi/AzForms/master/services/21-vm-mult-images/CreateUiDefinition.json"
 
 # URL encode the input paths
 $link_to_arm_json = [System.Web.HttpUtility]::UrlEncode($link_to_arm_json)

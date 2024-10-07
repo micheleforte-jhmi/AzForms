@@ -3,17 +3,17 @@ param vmName string = 'JHCTX'
 
 @description('Choose the virtual machine size. Default is Standard_D2s_v3.')
 @allowed([
-  'Standard_D2s_v3'
-  'Standard_D2s_v4'
-  'Standard_D2s_v5'
+  'Standard_E2s_v5'
+  'Standard_E4s_v5'
+  'Standard_F16s_v2'
   'Standard_D4s_v5'
 ])
-param virtualMachineSize string = 'Standard_D2s_v3'
+param virtualMachineSize string = 'Standard_D4s_v5'
 
 @description('Choose the shared image.')
 @allowed([
   'ITJH_WS2022_2024-04_128GB'
-  'Image_Name'
+  'Hold for more...'
 ])
 param sharedImageShortName string = 'ITJH_WS2022_2024-04_128GB'
 
@@ -26,9 +26,9 @@ var sharedImageIds = {
 var sharedImageId = sharedImageIds[sharedImageShortName]
 
 // Hardcoded networking values
-var vnetName = 'AZ-East-JH-CLOUD-PROD-10.150.240.0-20'
-var vnetResourceGroup = 'jh-cloud-prod-rg'
-var subnetName = 'AZ-East-JH-CLOUD-PROD-10.150.254.0-24'
+var vnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.80.0-20'
+var vnetResourceGroup = 'JH-CITRIX-PROD-RG'
+var subnetName = 'AZ-East2-JH-CITRIX-PROD-10.156.81.0-24'
 
 // @description('Location for all resources.')
 // param location string = resourceGroup().location
@@ -43,15 +43,15 @@ param adminUsername string = 'CloudADM'
 @secure()
 param adminPassword string
 
-@description('Additional part of the cmdb_pas tag to be appended after "Cloud-SVI-"')
-param cmdbPasSuffix string ='Cloud-SVI-'
+@description('Additional part of the cmdb_pas tag to be appended after "Cloud-Citrix-"')
+param cmdbPasSuffix string ='Citrix-'
 
 @description('Tags to be applied to resources')
 var tags = {
-  Environment: 'PROD'
-  Project: 'AzFormDeployment'
+  Environment: 'Test'
+  Project: 'AzCitrixDeployment'
   Image: sharedImageShortName
-  Version: 'Created by 22-SVI-IMAGE'
+  Version: 'Created by 23-vm'
   cmdb_pas: cmdbPasSuffix
 }
 
